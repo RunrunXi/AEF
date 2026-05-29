@@ -1,5 +1,4 @@
 {
-  "itemGroup.aef": "Example Mod Tab",
-  "block.aef.example_block": "Example Block",
-  "item.aef.example_item": "Example Item"
+  "key.categories.aef": "Applied Energistics 2: Favorites",
+  "key.aef.favorite_item": "Favorite Item"
 }
