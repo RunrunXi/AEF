@@ -4,8 +4,10 @@
   "package": "me.cyanhana.aef.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "RepoMixin"
   ],
   "client": [
+    "MEStorageScreenMixin",
   ],
   "injectors": {
     "defaultRequire": 1
