@@ -6,6 +6,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.nbt.Tag;
+import net.minecraft.nbt.TagParser;
 import net.neoforged.fml.loading.FMLPaths;
 
 import java.io.IOException;
@@ -82,7 +85,6 @@ public final class FavoritesKeys {
     public static void load() {
         Path path = FMLPaths.CONFIGDIR.get().resolve(FILE_NAME);
         if (!Files.exists(path)) return;
-
         try {
             String json = Files.readString(path);
             JsonObject root = GSON.fromJson(json, JsonObject.class);
@@ -91,7 +93,7 @@ public final class FavoritesKeys {
             favorites.clear();
             for (int i = 0; i < array.size(); i++) {
                 String tagStr = array.get(i).getAsString();
-                net.minecraft.nbt.Tag tag = net.minecraft.nbt.StringTag.valueOf(tagStr);
+                Tag tag = TagParser.parseTag(tagStr);
 
                 // 从 NBT 解析 GenericStack
                 var result = GenericStack.CODEC.parse(net.minecraft.nbt.NbtOps.INSTANCE, tag);
@@ -101,6 +103,8 @@ public final class FavoritesKeys {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (CommandSyntaxException e) {
+            throw new RuntimeException(e);
         }
     }
 }
