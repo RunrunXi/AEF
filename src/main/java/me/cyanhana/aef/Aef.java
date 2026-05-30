@@ -21,14 +21,14 @@ public class Aef {
     public static final Logger LOGGER = LoggerFactory.getLogger(Aef.class);
 
     public Aef(IEventBus modEventBus, ModContainer modContainer) {
-        if (FMLEnvironment.dist.isClient()) {
-            modEventBus.addListener(this::registerKeyBindings);
-        }
+//        if (FMLEnvironment.dist.isClient()) {
+//            modEventBus.addListener(this::registerKeyBindings);
+//        }
     }
 
-    private void registerKeyBindings(final RegisterKeyMappingsEvent event) {
-        ModKeyBindings.register(event);
-    }
+//    private void registerKeyBindings(final RegisterKeyMappingsEvent event) {
+//        ModKeyBindings.register(event);
+//    }
 
     @EventBusSubscriber(modid = MODID, value = Dist.CLIENT)
     public static class ClientModEvents {
