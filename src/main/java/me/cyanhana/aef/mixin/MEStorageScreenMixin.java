@@ -3,7 +3,6 @@ package me.cyanhana.aef.mixin;
 import appeng.api.stacks.AEKey;
 import appeng.client.gui.AEBaseScreen;
 import appeng.client.gui.me.common.MEStorageScreen;
-import appeng.client.gui.me.common.PinnedKeys;
 import appeng.client.gui.me.common.Repo;
 import appeng.client.gui.me.common.RepoSlot;
 import appeng.client.gui.style.ScreenStyle;
@@ -27,12 +26,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = MEStorageScreen.class, remap = false)
+@Mixin(MEStorageScreen.class)
 public abstract class MEStorageScreenMixin<C extends MEStorageMenu>
         extends AEBaseScreen<C> implements ISortSource {
 
     @Final
-    @Shadow
+    @Shadow(remap = false)
     protected Repo repo;
 
     public MEStorageScreenMixin(C menu, Inventory playerInventory, Component title, ScreenStyle style) {
