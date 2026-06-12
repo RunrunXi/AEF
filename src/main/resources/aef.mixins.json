@@ -2,12 +2,13 @@
   "required": true,
   "minVersion": "0.8",
   "package": "me.cyanhana.aef.mixin",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "aef.refmap.json",
   "mixins": [
-    "RepoMixin"
   ],
   "client": [
     "MEStorageScreenMixin",
+    "RepoMixin"
   ],
   "injectors": {
     "defaultRequire": 1
