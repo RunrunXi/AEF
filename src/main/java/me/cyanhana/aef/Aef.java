@@ -1,6 +1,7 @@
 package me.cyanhana.aef;
 
 import com.mojang.logging.LogUtils;
+import me.cyanhana.aef.client.gui.FavoritesKeys;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -21,7 +22,7 @@ public class Aef {
 
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            //TODO: FavoritesKeys.init();
+            FavoritesKeys.init();
         }
     }
 }

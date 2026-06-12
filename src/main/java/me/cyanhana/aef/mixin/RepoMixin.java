@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
 
-@Mixin(Repo.class)
+@Mixin(value = Repo.class, remap = false)
 public class RepoMixin {
     @Shadow
     private final ArrayList<GridInventoryEntry> view = new ArrayList<>();

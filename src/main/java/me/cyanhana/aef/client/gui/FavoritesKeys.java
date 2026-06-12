@@ -7,9 +7,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.nbt.TagParser;
-import net.neoforged.fml.loading.FMLPaths;
+import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -63,9 +64,8 @@ public final class FavoritesKeys {
             // 将 AEKey 包装成 GenericStack（数量随便填1，反正只用来存储key）
             GenericStack stack = new GenericStack(key, 1);
 
-            // 使用 GenericStack 自带的 TAG_CODEC 转换为 NBT
-            var tag = GenericStack.CODEC.encodeStart(net.minecraft.nbt.NbtOps.INSTANCE, stack)
-                    .getOrThrow();
+            // AE2 1.20.1 使用 writeTag 静态方法将 GenericStack 序列化为 CompoundTag
+            CompoundTag tag = GenericStack.writeTag(stack);
 
             array.add(tag.toString());
         }
@@ -95,11 +95,11 @@ public final class FavoritesKeys {
                 String tagStr = array.get(i).getAsString();
                 Tag tag = TagParser.parseTag(tagStr);
 
-                // 从 NBT 解析 GenericStack
-                var result = GenericStack.CODEC.parse(net.minecraft.nbt.NbtOps.INSTANCE, tag);
-                result.result().ifPresent(stack -> {
+                // AE2 1.20.1 使用 readTag 静态方法从 CompoundTag 反序列化 GenericStack
+                if (tag instanceof CompoundTag compoundTag) {
+                    GenericStack stack = GenericStack.readTag(compoundTag);
                     favorites.add(stack.what());
-                });
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

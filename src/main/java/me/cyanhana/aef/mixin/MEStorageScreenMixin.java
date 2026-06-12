@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(MEStorageScreen.class)
+@Mixin(value = MEStorageScreen.class, remap = false)
 public abstract class MEStorageScreenMixin<C extends MEStorageMenu>
         extends AEBaseScreen<C> implements ISortSource {
 
